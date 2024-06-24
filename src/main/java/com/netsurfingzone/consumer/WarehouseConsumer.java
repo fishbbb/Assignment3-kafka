@@ -21,14 +21,6 @@ public class WarehouseConsumer {
         //TODO:输出给web
     }
 
-    @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
-    private void processSendMessage(WarehouseMessage message) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = mapper.writeValueAsString(message);
-        logger.info("Json message received using Kafka listener " + jsonString);
-        //TODO:输出给web
-    }
-
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_WAREHOUSE_OUTBOUND, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
     private void processOutMessage(WarehouseMessage message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

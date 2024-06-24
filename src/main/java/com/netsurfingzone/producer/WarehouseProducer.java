@@ -30,17 +30,7 @@ public class WarehouseProducer{
         return "Good successfully assign to Warehouse A";
     }
 
-    @PostMapping("/send")
-    public String send(@RequestBody WarehouseMessage message) {
-        try {
-            kafkaTemplate.send(ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, message);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error publishing send warehouse message";
-        }
-        return "Send Goods successfully from auto car";
-    }
-
+    //收到订单之后出库
     @PostMapping("/out")
     public String out(@RequestBody InventoryRecord record) {
         //recordService.out(record);
