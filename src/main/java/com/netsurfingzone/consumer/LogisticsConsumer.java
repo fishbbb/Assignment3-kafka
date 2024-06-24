@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+
+import java.io.IOException;
 
 @Component
 public class LogisticsConsumer {
@@ -17,12 +21,14 @@ public class LogisticsConsumer {
 
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_ARRIVAL, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
-    private void processArrivalMessage(GoodMessage message) throws JsonProcessingException {
+    private void processArrivalMessage(GoodMessage message) throws IOException {
         // 处理到达消息的逻辑
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
         logger.info("Json message received using Kafka listener " + jsonString);
         // 可以在这里调用相关的业务逻辑处理
+        // Send the message to WebSocket clients
+
     }
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_UNLOADING, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
