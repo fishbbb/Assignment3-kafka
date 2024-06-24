@@ -21,8 +21,12 @@ public class LogisticsConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(com.netsurfingzone.consumer.KafkaConsumer.class);
 
-    @Autowired
     private SimpMessagingTemplate messagingTemplate;
+
+    @Autowired
+    public void setMessagingTemplate(SimpMessagingTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_ARRIVAL, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
     private void processArrivalMessage(GoodMessage message) throws IOException {
         // 处理到达消息的逻辑
