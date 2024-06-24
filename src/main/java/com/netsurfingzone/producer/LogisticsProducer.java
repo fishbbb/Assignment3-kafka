@@ -1,7 +1,7 @@
 package com.netsurfingzone.producer;
 
 import com.netsurfingzone.constant.ApplicationConstant;
-import com.netsurfingzone.dto.Goods;
+import com.netsurfingzone.dto.GoodMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ public class LogisticsProducer {
 
     // 货物到达
     @PostMapping("/arrival")
-    public String arrival(@RequestBody Goods message) {
+    public String arrival(@RequestBody GoodMessage message) {
         try {
             kafkaTemplate.send(ApplicationConstant.TOPIC_LOGISTICS_ARRIVAL, message);
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class LogisticsProducer {
 
     // 货物卸货
     @PostMapping("/unload")
-    public String unload(@RequestBody Goods message) {
+    public String unload(@RequestBody GoodMessage message) {
         try {
             kafkaTemplate.send(ApplicationConstant.TOPIC_LOGISTICS_UNLOADING, message);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class LogisticsProducer {
     }
 
     @PostMapping("/inspection")
-    public String inspection(@RequestBody Goods message) {
+    public String inspection(@RequestBody GoodMessage message) {
         try {
             // 模拟执行货物检查的具体逻辑
 

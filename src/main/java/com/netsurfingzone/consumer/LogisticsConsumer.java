@@ -3,7 +3,7 @@ package com.netsurfingzone.consumer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsurfingzone.constant.ApplicationConstant;
-import com.netsurfingzone.dto.Goods;
+import com.netsurfingzone.dto.GoodMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,7 +16,7 @@ public class LogisticsConsumer {
 
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_ARRIVAL, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
-    private void processArrivalMessage(Goods message) throws JsonProcessingException {
+    private void processArrivalMessage(GoodMessage message) throws JsonProcessingException {
         // 处理到达消息的逻辑
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
@@ -25,7 +25,7 @@ public class LogisticsConsumer {
     }
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_UNLOADING, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
-    private void processUnloadMessage(Goods message) throws JsonProcessingException {
+    private void processUnloadMessage(GoodMessage message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
         logger.info("Json message received using Kafka listener " + jsonString);
@@ -33,7 +33,7 @@ public class LogisticsConsumer {
     }
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_LOGISTICS_INSPECTION, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
-    private void processInspectionMessage(Goods message) throws JsonProcessingException {
+    private void processInspectionMessage(GoodMessage message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
         logger.info("Json message received using Kafka listener " + jsonString);

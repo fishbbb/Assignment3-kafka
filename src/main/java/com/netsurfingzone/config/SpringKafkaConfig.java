@@ -3,7 +3,7 @@ package com.netsurfingzone.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.netsurfingzone.dto.Goods;
+import com.netsurfingzone.dto.GoodMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -21,7 +21,6 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.netsurfingzone.constant.ApplicationConstant;
-import com.netsurfingzone.dto.Student;
 
 @Configuration
 @EnableKafka
@@ -43,7 +42,7 @@ public class SpringKafkaConfig {
 	}
 
 	@Bean
-	public ConsumerFactory<String, Goods> consumerFactory() {
+	public ConsumerFactory<String, GoodMessage> consumerFactory() {
 		Map<String, Object> configMap = new HashMap<>();
 		configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, ApplicationConstant.KAFKA_LOCAL_SERVER_CONFIG);
 		configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -54,8 +53,8 @@ public class SpringKafkaConfig {
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, Goods> kafkaListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, Goods> factory = new ConcurrentKafkaListenerContainerFactory<String, Goods>();
+	public ConcurrentKafkaListenerContainerFactory<String, GoodMessage> kafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, GoodMessage> factory = new ConcurrentKafkaListenerContainerFactory<String, GoodMessage>();
 		factory.setConsumerFactory(consumerFactory());
 		return factory;
 	}

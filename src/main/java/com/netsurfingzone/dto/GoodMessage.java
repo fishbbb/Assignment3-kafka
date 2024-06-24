@@ -1,6 +1,6 @@
 package com.netsurfingzone.dto;
 
-public class Goods {
+public class GoodMessage {
     private String messageId;
     private String messageType;
     private String goodsId;
