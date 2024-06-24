@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +19,8 @@ public class WarehouseConsumer {
     @Autowired
     private InventoryServiceImpl inventoryService;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
     private void processAssignMessage(WarehouseMessage message) throws JsonProcessingException {
@@ -25,7 +28,7 @@ public class WarehouseConsumer {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
         logger.info("Json message received using Kafka listener " + jsonString);
-        //TODO:输出给web
+        messagingTemplate.convertAndSend("/ws","Json message received using Kafka listener " + jsonString);
     }
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_WAREHOUSE_OUTBOUND, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)
@@ -34,6 +37,7 @@ public class WarehouseConsumer {
         String jsonString = mapper.writeValueAsString(message);
         logger.info("Json message received using Kafka listener " + jsonString);
         //TODO:输出给web
+        messagingTemplate.convertAndSend("/ws","Json message received using Kafka listener " + jsonString);
     }
     
 }
