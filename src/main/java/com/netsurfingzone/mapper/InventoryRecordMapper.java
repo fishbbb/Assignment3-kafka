@@ -2,6 +2,7 @@ package com.netsurfingzone.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.netsurfingzone.dto.InventoryRecord;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.netsurfingzone.dto.InventoryRecord;
  * @author Jinxuan Chen
  * @since 2024-04-30
  */
+@Mapper
 public interface InventoryRecordMapper extends BaseMapper<InventoryRecord> {
 
 }
