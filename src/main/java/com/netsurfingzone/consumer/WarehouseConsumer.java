@@ -4,12 +4,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsurfingzone.constant.ApplicationConstant;
 import com.netsurfingzone.dto.WarehouseMessage;
+import com.netsurfingzone.service.Impl.InventoryServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WarehouseConsumer {
     private static final Logger logger = LoggerFactory.getLogger(com.netsurfingzone.consumer.KafkaConsumer.class);
+
+    @Autowired
+    private InventoryServiceImpl inventoryService;
 
 
     @KafkaListener(groupId = ApplicationConstant.GROUP_ID_JSON, topics = ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, containerFactory = ApplicationConstant.KAFKA_LISTENER_CONTAINER_FACTORY)

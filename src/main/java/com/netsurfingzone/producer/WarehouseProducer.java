@@ -1,8 +1,8 @@
 package com.netsurfingzone.producer;
 
 import com.netsurfingzone.constant.ApplicationConstant;
-import com.netsurfingzone.dto.WarehouseMessage;
 import com.netsurfingzone.dto.InventoryRecord;
+import com.netsurfingzone.dto.WarehouseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/produce")
 public class WarehouseProducer{
-
 
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;

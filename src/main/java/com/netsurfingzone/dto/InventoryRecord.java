@@ -1,6 +1,15 @@
 package com.netsurfingzone.dto;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+
 /**
  * <p>
  * 出入库记录表
@@ -9,8 +18,15 @@ package com.netsurfingzone.dto;
  * @author Jinxuan Chen
  * @since 2024-04-30
  */
-public class InventoryRecord  {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("inventory_record")
+public class InventoryRecord  implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
     private String cid;
