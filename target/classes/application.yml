@@ -1,2 +1,40 @@
 server:
-   port: 9091
+  port: 9091
+
+spring:
+  application:
+    name: WarehouseManageBackend
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: "12345"
+      database: 0
+      timeout: 5000
+
+  datasource:
+    name: 'kafka'
+    url: jdbc:mysql://localhost:3306/kafka?serverTimezone=GMT
+    username: 'root'
+    password: '123456'
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: GMT+8
+
+  main:
+    allow-circular-references: true
+
+
+mybatis-plus:
+  type-aliases-package: com.netsurfingzone
+  mapper-locations: classpath:/mappers/*.xml
+
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+

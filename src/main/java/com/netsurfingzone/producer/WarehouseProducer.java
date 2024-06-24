@@ -1,7 +1,7 @@
 package com.netsurfingzone.producer;
 
 import com.netsurfingzone.constant.ApplicationConstant;
-import com.netsurfingzone.dto.GoodMessage;
+import com.netsurfingzone.dto.WarehouseMessage;
 import com.netsurfingzone.dto.InventoryRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,7 +20,7 @@ public class WarehouseProducer{
     private KafkaTemplate<String, Object> kafkaTemplate;
 
     @PostMapping("/assignWarehouse")
-    public String assign(@RequestBody GoodMessage message) {
+    public String assign(@RequestBody WarehouseMessage message) {
         try {
             kafkaTemplate.send(ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, message);
         } catch (Exception e) {
@@ -31,7 +31,7 @@ public class WarehouseProducer{
     }
 
     @PostMapping("/send")
-    public String send(@RequestBody GoodMessage message) {
+    public String send(@RequestBody WarehouseMessage message) {
         try {
             kafkaTemplate.send(ApplicationConstant.TOPIC_WAREHOUSE_INVENTORY, message);
         } catch (Exception e) {
